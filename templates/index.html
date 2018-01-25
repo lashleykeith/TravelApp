@@ -1,0 +1,49 @@
+{% extends "main.html" %}
+{% block contents %}
+
+<div class="contents">
+    <div class = 'category'>
+        <h3>Continents</h3>
+        {% for category in vacation %}
+            <a href = "{{url_for('showCateogry', area_name= category.name)}}">{{category.name}}</a><br>
+        {% endfor %}
+    </div>
+    <div class = 'item'>
+        {% if session["username"] != null  %}
+          <div class = "addItem">
+              <a href="{{url_for('newItem')}}">Add Location</a>
+          </div>
+        {% endif %}
+        <h3>Latest Destinations </h3>
+        {% for item in items %}
+            <a href = "{{url_for('showDescription', area_name = item.category.name , item_title =  item.title)}}">{{item.title}} 
+            <i>({{item.category.name}})</i>
+            </a><br>
+        {% endfor %}
+    </div>
+        <div class = 'item'>
+                <div class="sliderBox">
+                    <div class="slider">
+                        <ul>
+                            <li><a href="#"><img src="/static/s_images/slider/a1.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a2.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a3.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a4.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a5.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a6.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a7.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a8.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a9.jpg"></a></li>
+                            <li><a href="#"><img src="/static/s_images/slider/a10.jpg"></a></li>
+                             <li><a href="#"><img src="/static/s_images/slider/a11.jpg"></a></li>
+                              <li><a href="#"><img src="/static/s_images/slider/a12.jpg"></a></li>
+                               <li><a href="#"><img src="/static/s_images/slider/a13.jpg"></a></li>
+                                <li><a href="#"><img src="/static/s_images/slider/a14.jpg"></a></li>
+                                 <li><a href="#"><img src="/static/s_images/slider/a15.jpg"></a></li>
+                                  <li><a href="#"><img src="/static/s_images/slider/a16.jpg"></a></li>
+                        </ul>
+                    </div>
+                </div>
+</div>
+
+{% endblock %}

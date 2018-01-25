@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block contents %}
+
+<div class="contents">
+    <div class = 'category'>
+        <h3>Places and Continents</h3>
+        {% for category in vacation %}
+            <a href = "{{url_for('showCateogry', area_name = category.name)}}">{{category.name}}</a><br>
+        {% endfor %}
+    </div>
+    <div class = 'item'>
+        <h3> {{selectedName}} Locations  ({{items.count()}} Locations)</h3>
+        {% for item in items %}
+            <a href = "{{url_for('showDescription', area_name = selectedName , item_title =  item.title)}}">{{item.title}}
+             </a><br>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+<!--showCateogry showCategory -->

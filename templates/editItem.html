@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block contents %}
+{% if session["username"] != null  %}
+
+    <div class="contents">
+        <div class = 'item'>  
+        {% if msg != null %}
+            {{msg}} 
+        {% else %}
+        <form method = 'POST'>
+            <p>Title:</p>
+                <input type ='text' size='30' name='title' placeholder = '{{items.title}}'>
+            <p>Description:</p>
+                <input type ='text' size='50' name='description' placeholder = '{{items.description}}'><br><br>
+            <p>Photo:</p>
+                <input type ='text' size='50' name='photo' placeholder = '{{items.photo}}'>
+            <p>Category:</p>
+                <select name="category">
+                <option value="{{items.category_id}}" selected>{{items.category.name}}</option>
+                <option></option>
+                {% for category in vacation %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                {% endfor %}
+                </select>
+            <br><br>
+            <input type='submit' value='Submit'>
+        </form>
+        {% endif %}
+        </div>
+    </div>
+
+{% else %}
+    
+    <div class="contents">
+        <p> 
+            You must be logged in to preform this feature
+        </p>
+    </div>
+
+{% endif %}
+{% endblock %}

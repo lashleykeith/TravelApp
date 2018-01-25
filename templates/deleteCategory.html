@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block contents %}
+ {% if session["username"] != null  %}
+
+<div class="contents">
+    <div class = 'item'>
+        {% if msg != null %}
+            {{msg}}
+        {% else %}
+
+        <h3> Are you sure you want to delete {{items.title}}? </h3>
+        <form action="#" method = 'post'>
+            <input type='submit', value = 'Delete'>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% else %}
+
+    <div class="contents">
+        <p>
+            You must be loged in to preform this feature
+        </p>
+     </div> 
+
+{% endif %} 
+{% endblock %}

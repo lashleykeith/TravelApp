@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% block contents %}
+
+<div class="contents">
+    <div class = 'item'>
+        <h3> {{selectedName}}  </h3>
+             <p> Description:   {{items.description}} </p>
+             <p> Link to image:   <a href="{{items.photo}}">Location</a> </p>
+             <img src=" {{url_for('send_image', filename=image_name)}}" height="80px" class="img-rounded">
+
+ {% if session["username"] != null  %}
+
+        <div class = "adjustItem">
+            <a href="{{url_for('editCategory', item_title = items.title)}}">Edit</a> 
+           |<a href="{{url_for('deleteCategory', item_title = items.title)}}">Delete</a>
+        </div>
+
+{% endif %}
+
+     </div>
+</div>
+
+
+{% endblock %}

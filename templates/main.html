@@ -1,0 +1,90 @@
+{% block main %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"> </script>
+  <script>  
+   function signOut(){
+         $.ajax({
+           type: 'POST',
+           url: '/gdisconnect',
+           success: function(result) {
+             if (result) {
+                    var getUrl = window.location;
+                    var baseUrl = getUrl .protocol + "//" + getUrl.host;
+                    window.location = baseUrl;
+             } 
+           }
+       });
+    } 
+
+
+   </script>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}"> 
+ </head>
+ 
+ 
+
+
+
+
+ <body>
+
+     <div class="header">
+         <div class="header-contents">
+             <div class="header-name">
+                 Vacation Destinations
+             </div>
+             
+          <div id="signoutButton" class="login"
+           {% if session["username"] == null or session["username"] ==  "" %} 
+              style="display:table cell"
+           
+
+           {% else %}
+              style="display:none"        
+           {% endif %}
+          >
+
+
+
+            <button style="width: 114px; height: 36px;" onclick="window.location.href='/login'" >Sign in </button>
+          </div>
+
+
+          <div id="signoutButton" class="login"
+           {% if session["username"] != null and session["username"]
+          !=  "" %} 
+              style="display:table cell"
+           {% else %}
+              style="display:none"        
+           {% endif %}
+          >
+          
+
+
+          <button style="width: 114px; height: 36px;" onClick="signOut()">Sign out </button>
+        
+
+        </div>
+        </div>
+    </div>
+    <div id="result">
+      {% if session["username"] != null or session["username"] ==  "" %} 
+          Welcome, {{session["username"]}}
+      {% endif %}
+      </div>
+<script>
+
+  </script>
+    {% block contents %}{% endblock %}
+  
+  </body>
+
+</html>
+
+{% endblock %}

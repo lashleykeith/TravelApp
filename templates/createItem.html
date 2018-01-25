@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+{% block contents %}
+{% if session["username"] != null  %}
+
+    <div class="contents">
+        <div class = 'item'>   
+        {{msg}}
+        <form  method="POST"  enctype="multipart/form-data">
+            <p>Title:</p>
+                <input type ='text' size='30' name='title'>
+            <p>Description:</p>
+                <input type ='text' size='50' name='description'>
+            <br><br><p>Enter Link:</p>
+                <input type ='text' size='50' name='photo'>
+                <input type="file" name="file" accept="image/*" multiple>
+            
+
+            <p>Category:</p>
+                <select name="category">
+                <option></option>
+                {% for category in vacation %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                {% endfor %}
+                </select>
+
+            <br><br>
+            <input type='submit' value='Submit'>
+        </form>
+        <br><br>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="contents">
+        <p>
+            You must be loged in to preform this feature
+        </p>
+     </div>
+ 
+
+{% endif %}
+{% endblock %}

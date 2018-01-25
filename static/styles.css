@@ -1,0 +1,172 @@
+body            {font-family: sans-serif; 
+                background-color: #ffffcc;}
+h1, h2, h3, h4  {color: #00004b; }
+h1, h2          {font-family: 'Georgia', serif; 
+                margin: 0; }
+h1              {}
+h2              {font-size: 1.2em;}
+p               {color: #1a1a00;}
+i               {color: #c4c4c4;}
+a               {text-decoration: none; 
+                color:#FFFFCC; 
+                font-size: .75em;}
+
+.header         {width: 100%; 
+                background-color: #00004b;
+                background-image: url(../static/backdrop2.jpg);
+                }
+
+.header-contents{width: 80%;
+                display: table;
+                margin: 0 auto;}
+
+.header-name    {color: #00004b;
+                font-size: 2em;
+                min-width: 25%}
+
+.login          {
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;                                           
+                font-size: 1em;
+                min-width: 10%;               
+                color: #ececec;}
+
+.description    {}
+
+.contents       {display: flex;
+                margin: 0 auto;
+                border: 1px solid;
+                border-radius: 10px; 
+                padding: 25px; 
+                margin: 25px auto; 
+                border-color: #999999; 
+                background-color: #ececec;
+                /*background-image: url(../static/backdrop2.jpg);  */
+
+                width: 80%;
+                line-height:150%}
+
+.category       {width: 25%;
+                margin: 10px;}
+
+.category a     {color: #db0000;}
+
+.item           {width: 75%;               
+                margin: 10px;
+                border-left: 1px solid #c4c4c4;
+                padding-left: 20px;
+                line-height:150%}
+
+.item a         {color: #db0000;}
+
+.adjustItem a      {color: #db0000;}
+
+.flash {
+        background-color: #98FB98;
+        width:100%;
+        text-decoration: none;
+
+}
+
+.flash li {
+        list-style-type: none;
+        text-align: center;
+
+}
+
+.sliderBox{
+        width;100%;
+}
+
+.slider{
+        width:280px;
+        height:320px;
+        margin:0px auto;
+        border:8px solid #fff;
+        border-radius:10px;
+        overflow:hidden;
+}
+.slider > ul{
+        width:5600px;
+        height:340
+        -moz-animation:slider 25s linear infinite;
+        -webkit-animation:slider 25s linear infinite;
+        -o-animation:slider 25s linear infinite;
+        animation:slider 25s linear infinite;
+        position:relative;
+}
+.slider > ul:hover{
+        animation-play-state:paused;
+        }
+@keyframes slider{
+        0%{
+                left:0px;
+        }
+        8%{
+                left:0px;
+        }
+        10%{
+                left:-540px;
+        } 
+        18%{
+                left:-540px;
+                }
+                20%{
+                        left:-1080px;
+                        }
+                28%{
+                        left:-1080px;
+                        }
+        
+                30%{
+                        left:-1620px;
+                                
+                        }
+                38%{
+                        left:-1620px;
+                        }
+                40% {
+                        left:-2160px;
+                        }
+                48%{
+                        left:-2160px;   
+                   }
+                50%{
+                        left:-2700px;   
+                   }
+                 58%{
+                        left:-2700px;   
+                   }
+                 60%{
+                        left:-3240px;   
+                   }
+                 68%{
+                        left:-3240px;   
+                   }
+                70%{
+                        left:-3780px;
+                        }
+                78%{
+                        left:-3780px;                   
+                        }
+                80%{
+                        left:-4320px;
+                        }
+                88%{
+                        left:-4320px;
+                        }       
+                90%{
+                        left:-4860px;
+                        }       
+                89%{
+                        left:-4860px;
+                        }       
+        100%{
+                left:0px;
+                }
+        }
+.slider > ul > li {
+        float:left;
+        list-style:none;
+}
