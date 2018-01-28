@@ -22,7 +22,7 @@ class Destinations(Base):
         return {
             'name': self.name,
             'id': self.id,
-            'photo':self.id
+            'video':self.id
         }
 
 
@@ -50,7 +50,8 @@ class Item(Base):
     title = Column(String(250), nullable=False)
     id = Column(Integer, primary_key=True)
     description = Column(String(500))
-    photo = Column(String(250))
+    video = Column(String(250))
+    photo_image = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Destinations)
     createdUser_id = Column(Integer, ForeignKey('user.id'))
@@ -67,7 +68,8 @@ class Item(Base):
             'cat_id': self.category_id,
             'title': self.title,
             'description': self.description,
-            'photo': self.photo,
+            'video': self.video,
+            'photo_image': self.photo_image,
             'id': self.id,
             'created_User': self.user.username
         }

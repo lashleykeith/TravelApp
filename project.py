@@ -11,6 +11,9 @@ import json
 import random
 import string
 import requests
+#from flask.ext.uploads import UploadSet, IMAGES
+
+#destinationImgs = UploadSet('destination_images', IMAGES)
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -37,9 +40,9 @@ def gdisconnect():
                                  ('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    print 'In gdisconnect access token is %s', access_token
-    print 'User name is: '
-    print session['username']
+    #print 'In gdisconnect access token is %s', access_token
+    #print 'User name is: '
+    #print session['username']
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % session[
           'access_token']
     h = httplib2.Http()
@@ -83,7 +86,7 @@ def gconnect():
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
         response = make_response(
-            json.dumps('Failed to upgrade the authorization code.'), 401)
+            json.dumps('Failed to upgrade the authorization.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -103,14 +106,14 @@ def gconnect():
     gplus_id = credentials.id_token['sub']
     if result['user_id'] != gplus_id:
         response = make_response(
-            json.dumps("Token's user ID doesn't match given user ID."), 401)
+            json.dumps("Token's user ID doesn't match given ID."), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
 
     # Verify that the access token is valid for this app.
     if result['issued_to'] != CLIENT_ID:
         response = make_response(
-            json.dumps("Token's client ID does not match app's."), 401)
+            json.dumps("Token's client ID does not match the app."), 401)
         print "Token's client ID does not match app's."
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -145,7 +148,7 @@ def gconnect():
     output += '!</h1>'
     output += '<img src"'
     output += session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius:150px;- \
+    output += ' " style = "width: 250px; height: 250px;border-radius:150px;- \
         webkit-border-radius:150px;-moz-border-radius: 150px;">'
     flash("You are now logged in as %s" % session['username'])
     return output
@@ -241,7 +244,8 @@ def newItem():
         #creates new item!
         newItem = Item(title=request.form['title'],
                        description=request.form['description'],
-                       photo=request.form['photo'],
+                       video=request.form['video'],
+                       photo_image=request.form['photo_image'],
                        category_id=request.form['category'],
                        createdUser_id=dbuser.id)
         session_db.add(newItem)
@@ -338,8 +342,10 @@ def editCategory(item_title):
             editedItem.title = request.form['title']
         if request.form['description']:
             editedItem.description = request.form['description']
-        if request.form['photo']:
-            editedItem.photo = request.form['photo']
+        if request.form['video']:
+            editedItem.video = request.form['video']
+        if request.form['photo_image']:
+            editedItem.photo_image = request.form['photo_image']
         if request.form['category']:
             editedItem.category_id = request.form['category']
         session_db.add(editedItem)
@@ -431,6 +437,6 @@ def deleteCategory(item_title):
 
 
 if __name__ == '__main__':
-    app.secret_key = '3_1G6ali-KlTnRklxA5I6fgl'
+    app.secret_key = 'you_will_never_guess'
     app.debug = True
     app.run(host='0.0.0.0', port=8000)
