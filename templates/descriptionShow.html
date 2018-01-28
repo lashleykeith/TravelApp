@@ -5,8 +5,10 @@
     <div class = 'item'>
         <h3> {{selectedName}}  </h3>
              <p> Description:   {{items.description}} </p>
-             <p> Link to image:   <a href="{{items.photo}}">Location</a> </p>
-             <img src=" {{url_for('send_image', filename=image_name)}}" height="80px" class="img-rounded">
+             <p> Video:   <a href="{{items.video}}">Location</a> </p>
+            <!-- <img src=" {{url_for('send_image', filename=image_name)}}" height="80px" class="img-rounded">-->
+            <div>
+             <p> Welcome to {{selectedName}} <br><img src="{{items.photo_image}}" alt="picture" height="120px"></p></div>
 
  {% if session["username"] != null  %}
 
