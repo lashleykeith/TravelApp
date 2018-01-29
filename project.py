@@ -12,9 +12,7 @@ import random
 import string
 import requests
 from functools import wraps
-#from flask.ext.uploads import UploadSet, IMAGES
 
-#destinationImgs = UploadSet('destination_images', IMAGES)
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -77,7 +75,6 @@ def gdisconnect():
                                   400))
         response.headers['Content-Type'] = 'application/json'
     return response
-
 
 # This function is used to login the user useing his or her
 # google account
@@ -165,7 +162,6 @@ def gconnect():
     flash("You are now logged in as %s" % session['username'])
     return output
 
-
 # this function responds to the catalog.json URI and displays all
 # catalog items in JSON format to the user
 @app.route('/catalog.json')
@@ -206,7 +202,6 @@ def homePage():
     items = session_db.query(Item).order_by(desc(Item.id)).all()
     return render_template('index.html', vacation=vacation,
                            items=items)
-
 
 # This function is used to enable the user  to use his or her
 # google account as a third party oath provider
@@ -262,6 +257,7 @@ def newItem():
             newUser = User(username=session["username"])
             session_db.add(newUser)
             session_db.commit()
+
 
         dbuser = session_db.query(User).filter_by(
                  username=session["username"]).one()
@@ -450,9 +446,7 @@ def deleteCategory(item_title):
         return render_template('index.html', vacation=vacation, items=items)
     else:
         return render_template('deleteCategory.html', items=itemToDelete)
-
-
-
+        
 
 if __name__ == '__main__':
     app.secret_key = 'you_will_never_guess'
