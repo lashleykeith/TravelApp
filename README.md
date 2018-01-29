@@ -3,9 +3,9 @@
 
 ## What is need:
 
-* 1.  First you must initialize the database by using python version 2 to start the file destinations.py
-* 2.  Then use start the project.py file. You will not be able to delete or edit the original database entries via the application but you can go into destinations.py and change them manually.  Once you logged in with google verification you will be able to add and edit entries.
-* 3.  This program is in python 2 you can run it using `python project.py`.  Inside the s_images folder is another python program that I used to resize all the files in that folder.  If you want to use that program it is in python3.
+ 1.  First you must initialize the database by using python version 2 to start the file destinations.py
+ 2.  Then use start the project.py file. You will not be able to delete or edit the original database entries via the application but you can go into destinations.py and change them manually.  Once you logged in with google verification you will be able to add and edit entries.
+3.  This program is in python 2 you can run it using `python project.py`.  Inside the s_images folder is another python program that I used to resize all the files in that folder.  If you want to use that program it is in python3.
 
 
 

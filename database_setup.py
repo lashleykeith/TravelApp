@@ -61,6 +61,7 @@ class Item(Base):
     @property
     def imgsrc(self):
         return uploaded_images.url(self.photo)
+    @property
     def serialize(self):
         """Return object data in easily serializeable format"""
         

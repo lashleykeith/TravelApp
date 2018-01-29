@@ -11,6 +11,7 @@ import json
 import random
 import string
 import requests
+from functools import wraps
 #from flask.ext.uploads import UploadSet, IMAGES
 
 #destinationImgs = UploadSet('destination_images', IMAGES)
@@ -27,6 +28,17 @@ session_db = DBSession()
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Web client 1"
+
+
+def login_required(r):
+    @wraps(r)
+    def required_function(*arg, **kwarg):
+        if 'username' not in session:
+            return r(*args, **kwargs)
+        else:
+            flash("You are not allowed to access there")
+            return redirect('/login')
+    return required_function
 
 
 # This function is used to disconnect the user from his or her
@@ -172,7 +184,18 @@ def cateogryItemJSON():
         result.append(categoryResult)
         print result
     return jsonify(Category=[i for i in result])
-
+    
+    user_json = {
+    'cat_id': self.category_id,
+    'title': self.title,
+    'description': self.description,
+    'video': self.video,
+    'photo_image': self.photo_image,
+    'id': self.id,
+    'created_User': self.user.username
+                }      
+    user_json = json.dumps(user_json)
+    print(type(user_json))
 
 # this is the main loading page displays all Destinations and the
 # latest items order in decending order
@@ -226,10 +249,12 @@ def showDescription(area_name, item_title):
 # the templet checks the session object to see if the user is logged in
 # if the user is logged in then the delete function can be executed
 @app.route('/catalog/item/new/', methods=['GET', 'POST'])
+@login_required
 def newItem():
     vacation = session_db.query(Destinations).all()
     # check that the user is currently logged in
     if (request.method == 'POST' and session["username"] != ""):
+        
 
         numberuser = session_db.query(User).filter_by(
                      username=session["username"]).count()
@@ -257,6 +282,7 @@ def newItem():
 
 
 @app.route("/upload", methods=["POST"])
+@login_required
 def upload():
     #will make a new folder if none is there
     #target = os.path.join(APP_ROOT, 'static/')
@@ -290,6 +316,7 @@ def send_image(filename):
 # the templet checks the session object to see if the user is logged in
 # if the user is logged in then the delete function can be executed
 @app.route('/catalog/<item_title>/edit/', methods=['GET', 'POST'])
+@login_required
 def editCategory(item_title):
     vacation = session_db.query(Destinations).all()
     # if user not logged in show template telling user that he or she
@@ -364,11 +391,11 @@ def editCategory(item_title):
 # if the user is logged in then the delete function can be executed
 @app.route('/catalog/<item_title>/delete',
            methods=['GET', 'POST'])
+@login_required
 def deleteCategory(item_title):
     vacation = session_db.query(Destinations).all()
     # if user not logged in show template telling user that he or she
     # needs to be logged in
-    
 
 
     if ('username' not in session):
@@ -387,9 +414,6 @@ def deleteCategory(item_title):
         session_db.add(dbuser)
         session_db.commit()
     
-
-
-
     else:
         dbuser = session_db.query(User).filter_by(
                         username=session["username"]).one()
@@ -418,16 +442,10 @@ def deleteCategory(item_title):
                                                     ).one()
     
 
-
     if (request.method == 'POST' and session["username"] != ""):
         session_db.delete(itemToDelete)
         session_db.commit()
         vacation = session_db.query(Destinations).all()
-        
-
-
-
-
         items = session_db.query(Item).all()
         return render_template('index.html', vacation=vacation, items=items)
     else:
