@@ -1,4 +1,4 @@
-# This is a project that I am working on displaying travel destinations.
+# Udacity Catalog Application.
 * This is a category application that has been made for the Udacity Nanodegree.  This application is a blog for vacation destinations that allows you to post destinations listing them by the category of the continent and also add video and photos.
 
 ## What is need:
